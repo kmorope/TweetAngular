@@ -1,0 +1,69 @@
+<div class="tweet-container">
+  <div class="tweet">
+    <div class="user">
+      <div class="avatar">
+        <img src="{{ tweet.user.image }}" alt="" />
+      </div>
+      <div class="info">
+        <span class="name" title="{{ tweet.user.name }}">{{
+          tweet.user.name
+        }}</span>
+        <span class="username">@{{ tweet.user.username }}</span>
+      </div>
+    </div>
+    <div class="separator"></div>
+    <div class="tweet-text colapsed">
+      <p>{{ tweet.text.substring(0, 60) }}...</p>
+    </div>
+    <div class="separator"></div>
+    <div class="actions">
+      <fa-icon
+        [icon]="faReply"
+        class="fa-reply"
+        (click)="sendTweet(tweet.url)"
+      ></fa-icon>
+      <fa-icon [icon]="faRetweet" class="fa-retweet"></fa-icon>
+      <fa-icon
+        [icon]="['far', 'heart']"
+        class="fa-heart"
+        [ngClass]="{ hidden: favorite == true }"
+        (click)="toggleFav()"
+      ></fa-icon>
+      <fa-icon
+        [icon]="['fas', 'heart']"
+        class="fa-heart"
+        [ngClass]="{ hidden: favorite == false }"
+        (click)="toggleFav()"
+      ></fa-icon>
+    </div>
+  </div>
+  <div class="tweet-expanded" [ngClass]="{ expanded: expanded == true }">
+    <div class="image">
+      <fa-icon [icon]="faTwitter"></fa-icon>
+    </div>
+    <div class="expand" [ngClass]="{ hidden: expanded == true }">
+      <span>...más</span>
+      <fa-icon
+        [icon]="faChevronDown"
+        [ngClass]="{ hidden: expanded == true }"
+        (click)="expand()"
+      ></fa-icon>
+    </div>
+    <div class="content-extra" [ngClass]="{ hidden: expanded == false }">
+      <div class="date">
+        {{ tweet.date }}
+      </div>
+      <div class="tweet-text">
+        <p>
+          {{ tweet.text }}
+        </p>
+      </div>
+      <fa-icon
+        [icon]="faChevronUp"
+        class="fa-chevron-up"
+        [ngClass]="{ hidden: expanded == false }"
+        (click)="collapse()"
+      ></fa-icon>
+    </div>
+  </div>
+</div>

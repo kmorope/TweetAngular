@@ -1,0 +1,28 @@
+<div class="app">
+  <header>
+    <fa-icon [icon]="faHashtag" class="logo"></fa-icon>
+    <div class="search">
+      <fa-icon [icon]="faSearch"></fa-icon>
+      <input
+        #box
+        type="text"
+        placeholder="Tweet Search..."
+        (keydown.enter)="search(box.value)"
+        (keypress)="_keyPress($event)"
+      />
+    </div>
+    <fa-icon
+      [icon]="['fas', 'heart']"
+      class="favorites"
+      (click)="showFavoritesToggle()"
+    ></fa-icon>
+  </header>
+  <div class="content">
+    <div *ngIf="tweets.length == 0; else elseBlock" class="nodata">
+      <span>Empieza buscando algo...</span>
+      <img src="../assets/chip-head.png" alt="" />
+    </div>
+    <tweet #elseBlock *ngFor="let tweet of tweets" [tweet]="tweet"></tweet>
+  </div>
+</div>
+<div class="loading hidden">Loading&#8230;</div>
